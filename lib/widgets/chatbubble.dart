@@ -25,16 +25,25 @@ class _ChatBubbleState extends State<MyChatBubble> {
       backGroundColor: const  Color(0xffE7E7ED),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Text(
-            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
-            style: TextStyle(color: Colors.black),
+            widget.content,
+            style: const TextStyle(color: Colors.black),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
+          Row(children: [
+            Text(
+            widget.author,
+            style: const TextStyle(color: Colors.black, fontSize: 12),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 77),
+          ),
           Text(
-            "Johan Wolfgang von Goethe",
-            style: TextStyle(color: Colors.black54, fontSize: 12),
+            widget.timestamp.toString(),
+            style: const TextStyle(color: Colors.black54, fontSize: 12),
           ),
+          ],)   
         ],
       ),
     );

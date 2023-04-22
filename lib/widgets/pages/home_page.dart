@@ -6,7 +6,7 @@ class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child:MyChatBubble(content:' ', author:'', timestamp: DateTime.now()),
+      child:MyChatBubble(content:' Qoute', author:'test', timestamp: DateTime.now()),
           );
   }
 }
