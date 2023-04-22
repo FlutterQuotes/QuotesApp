@@ -42,3 +42,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# specific files
+/quotes_app/macos/Flutter/GeneratedPluginRegistrant.swift
+/quotes_app/pubspec.lock
+/quotes_app/pubspec.yaml
