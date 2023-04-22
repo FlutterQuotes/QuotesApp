@@ -40,7 +40,7 @@ class _ChatBubbleState extends State<MyChatBubble> {
             padding: EdgeInsets.only(left: 77),
           ),
           Text(
-            widget.timestamp.toString(),
+            '${widget.timestamp.day}.${widget.timestamp.month}.${widget.timestamp.year}',
             style: const TextStyle(color: Colors.black54, fontSize: 12),
           ),
           ],)   
