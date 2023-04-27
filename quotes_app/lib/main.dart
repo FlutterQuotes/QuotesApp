@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quotes_app/blocs/settings/settings_bloc.dart';
 import 'package:quotes_app/widgets/pages/home_page.dart';
 import 'package:quotes_app/widgets/pages/create_page.dart';
 import 'package:quotes_app/widgets/pages/settings_page.dart';
@@ -17,7 +19,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: const MyHomePage(title: 'Favorite Quotes To Go'),
+      home: BlocProvider(
+          create: (BuildContext context) => SettingsBloc(),
+          child: const MyHomePage(title: 'Favorite Quotes To Go')
+      ),
     );
   }
 }
