@@ -32,10 +32,12 @@ class ChatBubbleState extends State<MyChatBubble> {
           ),
           const SizedBox(height: 5),
           Row(children: [
-            Text(
-            widget.author,
-            style: const TextStyle(color: Colors.black, fontSize: 12),
-          ),
+            Expanded(
+              child: Text(
+                widget.author,
+                style: const TextStyle(color: Colors.black, fontSize: 12),
+              ),
+            ),
           const Padding(
             padding: EdgeInsets.only(left: 77),
           ),
