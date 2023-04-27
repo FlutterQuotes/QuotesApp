@@ -9,9 +9,15 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
 
-    return TextFormField(
-        onChanged: (String value) => settingsBloc.add(AuthorNameChanged(authorName: value)),
-        initialValue: settingsBloc.state.authorName,
+    return Column(
+      children: [
+        TextFormField(
+          onChanged: (String value) =>
+              settingsBloc.add(AuthorNameChanged(authorName: value)),
+          initialValue: settingsBloc.state.authorName,
+        ),
+        IconButton(onPressed: () => settingsBloc.add(DarkModeToggled()), icon: const Icon(Icons.lightbulb))
+      ],
     );
   }
 }
