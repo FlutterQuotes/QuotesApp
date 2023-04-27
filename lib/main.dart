@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:quotes_app/widgets/pages/home_page.dart';
 import 'package:quotes_app/widgets/pages/create_page.dart';
 import 'package:quotes_app/widgets/pages/settings_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() {
+
+  initializeFirebase();
+
   runApp(const MyApp());
 }
 
@@ -77,4 +82,9 @@ void _onItemTapped(int index) {
           ),
     );
   }
+}
+void initializeFirebase() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
