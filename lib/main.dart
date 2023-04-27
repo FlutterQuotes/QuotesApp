@@ -6,10 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() {
-
-  initializeFirebase();
-
-  runApp(const MyApp());
+  initialize(); 
 }
 
 class MyApp extends StatelessWidget {
@@ -83,8 +80,11 @@ void _onItemTapped(int index) {
     );
   }
 }
-void initializeFirebase() async {
+void initialize() async {
+  //initialize firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  //start app
+  runApp(const MyApp());
 }
