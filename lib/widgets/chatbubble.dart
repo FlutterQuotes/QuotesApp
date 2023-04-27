@@ -8,13 +8,13 @@ class MyChatBubble extends StatefulWidget{
   final String author;
   final DateTime timestamp;
 
-  MyChatBubble({super.key, required this.content, required this.author, required this.timestamp});
+  const MyChatBubble({super.key, required this.content, required this.author, required this.timestamp});
 
   @override
-  _ChatBubbleState createState() => _ChatBubbleState();
+  ChatBubbleState createState() => ChatBubbleState();
   }
 
-class _ChatBubbleState extends State<MyChatBubble> {
+class ChatBubbleState extends State<MyChatBubble> {
   
   @override
   Widget build(BuildContext context) {
