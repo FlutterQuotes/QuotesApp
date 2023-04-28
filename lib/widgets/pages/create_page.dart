@@ -5,20 +5,20 @@ import '../../blocs/settings/settings_bloc.dart';
 class CreateQuotePage extends StatefulWidget {
   final String username;
 
-  CreateQuotePage({super.key, required this.username});
+  const CreateQuotePage({super.key, required this.username});
 
   @override
-  _CreateQuotePageState createState() => _CreateQuotePageState();
+  CreateQuotePageState createState() => CreateQuotePageState();
 }
 
-class _CreateQuotePageState extends State<CreateQuotePage> {
+class CreateQuotePageState extends State<CreateQuotePage> {
   TextEditingController _quoteController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Quote'),
+        title: const Text('Create Quote'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -35,13 +35,13 @@ class _CreateQuotePageState extends State<CreateQuotePage> {
             Text('Username: ${widget.username}'),
             TextField(
               controller: _quoteController,
-              decoration: InputDecoration(labelText: 'Quote'),
+              decoration: const InputDecoration(labelText: 'Quote'),
               maxLines: 3,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _sendQuote,
-              child: Text('Send Quote'),
+              child: const Text('Send Quote'),
             ),
           ],
         ),
