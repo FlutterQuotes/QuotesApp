@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "745240441872",
+    "project_id": "flutterquotes-30991",
+    "storage_bucket": "flutterquotes-30991.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745240441872:android:b92af294895e277cbac695",
+        "android_client_info": {
+          "package_name": "com.example.quotes_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745240441872-klbf0t7r3am6i0q18rt57879ivs05ish.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_84pgYfdcS6cXMMHgJfGoXOXIGKKYFO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "745240441872-klbf0t7r3am6i0q18rt57879ivs05ish.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "745240441872-4i40n14g9i968j9mk2qliqkpvjejbvaj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.quotesApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

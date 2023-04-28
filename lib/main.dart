@@ -4,8 +4,13 @@ import 'package:quotes_app/blocs/settings/settings_bloc.dart';
 import 'package:quotes_app/widgets/pages/home_page.dart';
 import 'package:quotes_app/widgets/pages/create_page.dart';
 import 'package:quotes_app/widgets/pages/settings_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() {
+
+  initializeFirebase();
+
   runApp(const MyApp());
 }
 
@@ -83,4 +88,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+void initializeFirebase() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
