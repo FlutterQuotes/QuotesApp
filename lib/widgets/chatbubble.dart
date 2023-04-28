@@ -8,13 +8,13 @@ class MyChatBubble extends StatefulWidget{
   final String author;
   final DateTime timestamp;
 
-  MyChatBubble({super.key, required this.content, required this.author, required this.timestamp});
+  const MyChatBubble({super.key, required this.content, required this.author, required this.timestamp});
 
   @override
-  _ChatBubbleState createState() => _ChatBubbleState();
+  ChatBubbleState createState() => ChatBubbleState();
   }
 
-class _ChatBubbleState extends State<MyChatBubble> {
+class ChatBubbleState extends State<MyChatBubble> {
   
   @override
   Widget build(BuildContext context) {
@@ -32,10 +32,12 @@ class _ChatBubbleState extends State<MyChatBubble> {
           ),
           const SizedBox(height: 5),
           Row(children: [
-            Text(
-            widget.author,
-            style: const TextStyle(color: Colors.black, fontSize: 12),
-          ),
+            Expanded(
+              child: Text(
+                widget.author,
+                style: const TextStyle(color: Colors.black, fontSize: 12),
+              ),
+            ),
           const Padding(
             padding: EdgeInsets.only(left: 77),
           ),
