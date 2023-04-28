@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../blocs/settings/settings_bloc.dart';
 
 class CreateQuotePage extends StatefulWidget {
   final String username;
@@ -22,6 +24,14 @@ class _CreateQuotePageState extends State<CreateQuotePage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            BlocBuilder<SettingsBloc, SettingsState>(
+              builder: (context, state) {
+                return Text(
+                  state.authorName,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                );
+              }
+            ),
             Text('Username: ${widget.username}'),
             TextField(
               controller: _quoteController,
