@@ -25,7 +25,7 @@ class CreateQuotePage extends StatelessWidget{
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    _sendQuote(state.authorName);
+                    _sendQuote(context, state.authorName);
                   },
                   child: const Text('Send Quote'),
                 ),
@@ -37,13 +37,33 @@ class CreateQuotePage extends StatelessWidget{
     );
   }
 
-  void _sendQuote(String authorName) {
-    // Handle quote submission logic here.
-    // You can use _quoteController.text to get the quote entered by the user.
-    FirebaseFirestore.instance.collection('Quotes').add({
-      'author': authorName,
-      'content': _quoteController.text,
-      'timestamp': DateTime.now(),
-    });
+  void _sendQuote(BuildContext context, String authorName) {
+    String quote = _quoteController.text.trim();
+    if (quote.isNotEmpty) {
+      FirebaseFirestore.instance.collection('Quotes').add({
+        'author': authorName,
+        'content': quote,
+        'timestamp': DateTime.now(),
+      }).then((value) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Quote created successfully!'),
+          ),
+        );
+        _quoteController.clear();
+      }).catchError((error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to create quote. Please try again later.'),
+          ),
+        );
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Quote cannot be empty!'),
+        ),
+      );
+    }
   }
 }
