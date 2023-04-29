@@ -1,23 +1,47 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:quotes_app/widgets/chatbubble.dart';
-class HomePage extends StatelessWidget{
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column (
-        children: [
-          MyChatBubble(content:'Viel mehr als unsere Fähigkeiten sind es unsere Entscheidungen, die zeigen, wer wir wirklich sind.', 
-            author:'J.K. Rowling', timestamp: DateTime.now()),
-          MyChatBubble(content:'Wir sind so eitel, dass uns sogar an der Meinung der Leute, an denen uns nichts liegt, etwas gelegen ist.', 
-            author:'Marie von Ebner-Eschenbach', timestamp: DateTime.now()),          
-          MyChatBubble(content:'Zu mancher richtigen Entscheidung kam es nur, weil der Weg zur falschen gerade nicht frei war.', 
-            author:'Hans Krailsheimer', timestamp: DateTime.now()),
-          MyChatBubble(content:'Das Denken ist das Selbstgespräch der Seele.', 
-            author:'Plato', timestamp: DateTime.now()),
-        ],
-      )
+      child: FutureBuilder<QuerySnapshot>(
+          future: getCollections(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return const Text('Something went wrong');
+            }
+            if (!snapshot.hasData) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final List<QueryDocumentSnapshot<Object?>>? documents =
+                snapshot.data?.docs;
+            return ListView(
+                shrinkWrap: true,
+                children: documents!
+                    .map((doc) => MyChatBubble(
+                          content: doc['quote'].toString(),
+                          username: doc['username'].toString(),
+                          timestamp: doc['timestamp'].toDate(),
+                        ))
+                    .toList());
+          }),
     );
+  }
+}
+
+//function to check database connection
+Future<QuerySnapshot<Map<String, dynamic>>> getCollections() async {
+  try {
+    return await FirebaseFirestore.instance.collection('Quotes').get();
+  } catch (error) {
+    log(error.toString());
+    rethrow;
   }
 }

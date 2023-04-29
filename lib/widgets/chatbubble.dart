@@ -5,9 +5,10 @@ import 'package:flutter_chat_bubble/chat_bubble.dart';
 class MyChatBubble extends StatefulWidget{
 
   final String content;
-  final String author;
+  final String username;
   final DateTime timestamp;
   final TextEditingController? quoteController;
+
 
   MyChatBubble({super.key, required this.content, required this.author, required this.timestamp, this.quoteController});
 
@@ -51,9 +52,11 @@ class ChatBubbleState extends State<MyChatBubble> {
         ),
         const SizedBox(height: 5),
         Row(children: [
+          Expanded(
           Text(
             widget.author,
             style: const TextStyle(color: Colors.black, fontSize: 12),
+          ),
           ),
           const Padding(
             padding: EdgeInsets.only(left: 77),
