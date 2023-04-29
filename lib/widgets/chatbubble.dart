@@ -5,12 +5,12 @@ import 'package:flutter_chat_bubble/chat_bubble.dart';
 class MyChatBubble extends StatefulWidget{
 
   final String content;
-  final String username;
+  final String author;
   final DateTime timestamp;
   final TextEditingController? quoteController;
 
 
-  MyChatBubble({super.key, required this.content, required this.author, required this.timestamp, this.quoteController});
+  const MyChatBubble({super.key, required this.content, required this.author, required this.timestamp, this.quoteController});
 
   @override
   ChatBubbleState createState() => ChatBubbleState();
@@ -21,7 +21,7 @@ class ChatBubbleState extends State<MyChatBubble> {
   @override
   Widget build(BuildContext context) {
 
-    var chatBubbleChild;
+    List<Widget> chatBubbleChild;
     if (widget.quoteController == null) {
       chatBubbleChild = [
         Text(
@@ -47,12 +47,13 @@ class ChatBubbleState extends State<MyChatBubble> {
       chatBubbleChild = [
         TextField(
           controller: widget.quoteController,
-          decoration: InputDecoration(labelText: 'Quote'),
+          decoration: const InputDecoration(labelText: 'Quote'),
           maxLines: 3,
         ),
         const SizedBox(height: 5),
         Row(children: [
           Expanded(
+            child:
           Text(
             widget.author,
             style: const TextStyle(color: Colors.black, fontSize: 12),
