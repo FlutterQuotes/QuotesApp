@@ -1,35 +1,48 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:quotes_app/widgets/chatbubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-class HomePage extends StatelessWidget{
+
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  Widget _buildListItem (BuildContext context, DocumentSnapshot document){
-    return MyChatBubble(quote: document['quote'], username: document['username'], timestamp: document['timestamp'],);
-  }
-
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('Quotes').snapshots(),
-        builder: (context, snapshot){
-          if (snapshot.hasError) {
+      child: FutureBuilder<QuerySnapshot>(
+          future: getCollections(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
               return const Text('Something went wrong');
             }
-          if (!snapshot.hasData){
-            return const Center(
-            child: CircularProgressIndicator(),
-          );
-          }
-          return ListView.builder(
-            itemExtent:80.0 ,
-            itemCount: snapshot.data?.docs.length,
-            itemBuilder: (context, index) => 
-            _buildListItem(context, snapshot.data?.docs[index] as DocumentSnapshot<Object?>),
-          );
-        }
-        ),
+            if (!snapshot.hasData) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final List<QueryDocumentSnapshot<Object?>>? documents =
+                snapshot.data?.docs;
+            return ListView(
+                shrinkWrap: true,
+                children: documents!
+                    .map((doc) => MyChatBubble(
+                          quote: doc['quote'].toString(),
+                          username: doc['username'].toString(),
+                          timestamp: doc['timestamp'].toDate(),
+                        ))
+                    .toList());
+          }),
     );
+  }
+}
+
+//function to check database connection
+Future<QuerySnapshot<Map<String, dynamic>>> getCollections() async {
+  try {
+    return await FirebaseFirestore.instance.collection('Quotes').get();
+  } catch (error) {
+    log(error.toString());
+    rethrow;
   }
 }

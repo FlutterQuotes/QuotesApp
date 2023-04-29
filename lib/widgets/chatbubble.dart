@@ -32,13 +32,12 @@ class ChatBubbleState extends State<MyChatBubble> {
           ),
           const SizedBox(height: 5),
           Row(children: [
-            Text(
-            widget.username,
-            style: const TextStyle(color: Colors.black, fontSize: 12),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 77),
-          ),
+            Expanded(
+              child: Text(
+                widget.username,
+                style: const TextStyle(color: Colors.black, fontSize: 12),
+              ),
+            ),         
           Text(
             '${widget.timestamp.day}.${widget.timestamp.month}.${widget.timestamp.year}',
             style: const TextStyle(color: Colors.black54, fontSize: 12),
