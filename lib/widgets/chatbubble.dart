@@ -12,10 +12,10 @@ class MyChatBubble extends StatefulWidget{
   MyChatBubble({super.key, required this.content, required this.author, required this.timestamp, this.quoteController});
 
   @override
-  _ChatBubbleState createState() => _ChatBubbleState();
+  ChatBubbleState createState() => ChatBubbleState();
   }
 
-class _ChatBubbleState extends State<MyChatBubble> {
+class ChatBubbleState extends State<MyChatBubble> {
   
   @override
   Widget build(BuildContext context) {

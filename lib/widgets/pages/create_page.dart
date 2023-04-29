@@ -13,7 +13,7 @@ class CreateQuotePage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Quote'),
+        title: const Text('Create Quote'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
