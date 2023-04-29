@@ -26,8 +26,8 @@ class HomePage extends StatelessWidget {
                 shrinkWrap: true,
                 children: documents!
                     .map((doc) => MyChatBubble(
-                          content: doc['quote'].toString(),
-                          username: doc['username'].toString(),
+                          content: doc['content'].toString(),
+                          author: doc['author'].toString(),
                           timestamp: doc['timestamp'].toDate(),
                         ))
                     .toList());
