@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   static final _contentWidgets = <Widget>[
     const HomePage(),
-    const CreateQuotePage(username: 'Test'),
+    CreateQuotePage(),
     const SettingsPage(),
   ];
 
