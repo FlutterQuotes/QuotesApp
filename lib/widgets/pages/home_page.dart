@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:quotes_app/widgets/chatbubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,7 +26,7 @@ class HomePage extends StatelessWidget {
                 shrinkWrap: true,
                 children: documents!
                     .map((doc) => MyChatBubble(
-                          quote: doc['quote'].toString(),
+                          content: doc['quote'].toString(),
                           username: doc['username'].toString(),
                           timestamp: doc['timestamp'].toDate(),
                         ))

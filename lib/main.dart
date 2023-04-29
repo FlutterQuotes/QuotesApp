@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quotes_app/blocs/settings/settings_bloc.dart';
 import 'package:quotes_app/widgets/pages/home_page.dart';
 import 'package:quotes_app/widgets/pages/create_page.dart';
 import 'package:quotes_app/widgets/pages/settings_page.dart';
@@ -14,13 +16,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Quotes App',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-      ),
-      home: const MyHomePage(title: 'Favorite Quotes To Go'),
-    );
+    return BlocProvider(
+        create: (BuildContext context) => SettingsBloc(),
+        child: BlocBuilder<SettingsBloc, SettingsState>(
+          builder: (context, state) {
+            return MaterialApp(
+                title: 'Quotes App',
+                theme: ThemeData(),
+                darkTheme: ThemeData.dark(),
+                themeMode: state.theme,
+                home: const MyHomePage(title: 'Favorite Quotes To Go'));
+          },
+        ));
   }
 }
 
@@ -38,16 +45,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   static final _contentWidgets = <Widget>[
     const HomePage(),
-    const CreatePage(),
+    CreateQuotePage(),
     const SettingsPage(),
   ];
 
-void _onItemTapped(int index) {
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -68,15 +74,15 @@ void _onItemTapped(int index) {
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
-            )
+          )
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Theme.of(context).primaryColor,
         onTap: _onItemTapped,
       ),
       body: Center(
-          child: _contentWidgets.elementAt(_selectedIndex),
-          ),
+        child: _contentWidgets.elementAt(_selectedIndex),
+      ),
     );
   }
 }
