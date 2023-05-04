@@ -17,29 +17,30 @@ class MyChatBubble extends StatefulWidget{
   }
 
 class ChatBubbleState extends State<MyChatBubble> {
-  
+
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).colorScheme.primary;
 
     List<Widget> chatBubbleChild;
     if (widget.quoteController == null) {
       chatBubbleChild = [
         Text(
           widget.content,
-          style: const TextStyle(color: Colors.black),
+          style: TextStyle(color: primaryColor),
         ),
         const SizedBox(height: 5),
         Row(children: [
           Text(
             widget.author,
-            style: const TextStyle(color: Colors.black, fontSize: 12),
+            style: TextStyle(color: primaryColor, fontSize: 12),
           ),
           const Padding(
             padding: EdgeInsets.only(left: 77),
           ),
           Text(
             '${widget.timestamp.day}.${widget.timestamp.month}.${widget.timestamp.year}',
-            style: const TextStyle(color: Colors.black54, fontSize: 12),
+            style: TextStyle(color: primaryColor.withOpacity(0.5), fontSize: 12),
           ),
         ],)
       ];
@@ -56,7 +57,7 @@ class ChatBubbleState extends State<MyChatBubble> {
             child:
           Text(
             widget.author,
-            style: const TextStyle(color: Colors.black, fontSize: 12),
+            style: TextStyle(color: primaryColor, fontSize: 12),
           ),
           ),
           const Padding(
@@ -64,7 +65,7 @@ class ChatBubbleState extends State<MyChatBubble> {
           ),
           Text(
             '${widget.timestamp.day}.${widget.timestamp.month}.${widget.timestamp.year}',
-            style: const TextStyle(color: Colors.black54, fontSize: 12),
+            style: TextStyle(color: primaryColor.withOpacity(0.5), fontSize: 12),
           ),
         ],)
       ];
@@ -74,7 +75,7 @@ class ChatBubbleState extends State<MyChatBubble> {
       clipper: ChatBubbleClipper2(type: BubbleType.receiverBubble),
       alignment: Alignment.topLeft,
       margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
-      backGroundColor: const  Color(0xffE7E7ED),
+      backGroundColor: Theme.of(context).colorScheme.background,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: chatBubbleChild,
