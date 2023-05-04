@@ -9,11 +9,21 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc() : super(const SettingsInitial()) {
 
     on<DarkModeToggled>((event, emit) => emit(SettingsChanged(
-        theme: state.theme == ThemeMode.light ? ThemeMode.dark : ThemeMode.light,
-        authorName: state.authorName)));
+        theme: event.mode,
+        authorName: state.authorName,
+        colors: state.colors,
+    )));
 
     on<AuthorNameChanged>((event, emit) => emit(SettingsChanged(
         theme: state.theme,
-        authorName: event.authorName)));
+        authorName: event.authorName,
+        colors: state.colors,
+    )));
+
+    on<ColorChanged>((event, emit) => emit(SettingsChanged(
+        colors: {...event.colors},
+        theme: state.theme,
+        authorName: state.authorName,
+    )));
   }
 }
