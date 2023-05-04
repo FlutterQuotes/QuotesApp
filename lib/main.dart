@@ -22,8 +22,14 @@ class MyApp extends StatelessWidget {
           builder: (context, state) {
             return MaterialApp(
                 title: 'Quotes App',
-                theme: ThemeData(),
-                darkTheme: ThemeData.dark(),
+                theme: ThemeData(
+                  brightness: Brightness.light,
+                  colorScheme: ColorScheme.fromSeed(seedColor: state.colors['primaryColor'])
+                ),
+                darkTheme: ThemeData(
+                  brightness: Brightness.dark,
+                  colorScheme: ColorScheme.fromSeed(seedColor: state.colors['primaryColor'], brightness: Brightness.dark)
+                ),
                 themeMode: state.theme,
                 home: const MyHomePage(title: 'Favorite Quotes To Go'));
           },
@@ -77,12 +83,16 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).primaryColor,
         onTap: _onItemTapped,
+
       ),
       body: Center(
-        child: _contentWidgets.elementAt(_selectedIndex),
-      ),
+        child: IndexedStack(
+          alignment: Alignment.center,
+            children: _contentWidgets,
+            index: _selectedIndex
+        ),
+      )
     );
   }
 }
