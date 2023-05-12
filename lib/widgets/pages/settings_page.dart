@@ -54,8 +54,8 @@ class _SettingsPageState extends State<SettingsPage> {
             const Padding(padding: EdgeInsets.all(16)),
             OutlinedButton(
                 onPressed: () => _dialogBuilder(context),
-                child: const Text('Change color'))
-          ],
+                child: const Text('Change color'),
+            )],
         ),
       ),
     );
@@ -71,7 +71,7 @@ class _SettingsPageState extends State<SettingsPage> {
           return AlertDialog(
               title: const Text('Pick a color!'),
               content: SingleChildScrollView(
-                child: MaterialPicker(
+                child: BlockPicker(
                   pickerColor: pickerColor,
                   onColorChanged: (Color color) {
                     settingsBloc.add(ColorChanged(colors: {
@@ -111,8 +111,10 @@ class _SettingsPageState extends State<SettingsPage> {
           prefixIcon: Icon(Icons.people),
         ),
         controller: _controller,
-        onChanged: (text) =>
-            {settingsBloc.add(AuthorNameChanged(authorName: text))},
+        onChanged: (text) => {
+          settingsBloc.add(AuthorNameChanged(authorName: text))
+        },
+        style: TextStyle(color: Theme.of(context).colorScheme.primary),
       ),
     );
   }
@@ -137,7 +139,9 @@ class _SettingsPageState extends State<SettingsPage> {
       },
       child: Row(
         children: [
-          const Text('Mode'),
+          Text('Mode',
+            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+          ),
           const Spacer(),
           ToggleButtons(
             isSelected: _selectedMode,
