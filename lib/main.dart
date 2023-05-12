@@ -8,7 +8,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() {
-  initialize(); 
+  WidgetsFlutterBinding.ensureInitialized();
+  initialize();
 }
 
 class MyApp extends StatelessWidget {
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
                 themeMode: state.theme,
                 home: const MyHomePage(title: 'Favorite Quotes To Go'));
           },
-        ));
+        )
+    );
   }
 }
 
