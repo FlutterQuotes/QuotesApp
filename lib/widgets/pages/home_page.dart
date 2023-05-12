@@ -8,6 +8,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScrollController controller = ScrollController();
+
     return SingleChildScrollView(
       child: FutureBuilder<QuerySnapshot>(
           future: getCollections(),
@@ -24,6 +26,7 @@ class HomePage extends StatelessWidget {
                 snapshot.data?.docs;
             return ListView(
                 shrinkWrap: true,
+                controller: controller,
                 children: documents!
                     .map((doc) => MyChatBubble(
                           content: doc['content'].toString(),

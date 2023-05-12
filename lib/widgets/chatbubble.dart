@@ -75,7 +75,7 @@ class ChatBubbleState extends State<MyChatBubble> {
       clipper: ChatBubbleClipper2(type: BubbleType.receiverBubble),
       alignment: Alignment.topLeft,
       margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
-      backGroundColor: const  Color(0xffE7E7ED),
+      backGroundColor: Theme.of(context).colorScheme.background,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: chatBubbleChild,
