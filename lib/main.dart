@@ -8,7 +8,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() {
-  initialize(); 
+  WidgetsFlutterBinding.ensureInitialized();
+  initialize();
 }
 
 class MyApp extends StatelessWidget {
@@ -20,20 +21,31 @@ class MyApp extends StatelessWidget {
         create: (BuildContext context) => SettingsBloc(),
         child: BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, state) {
-            return MaterialApp(
-                title: 'Quotes App',
-                theme: ThemeData(
-                  brightness: Brightness.light,
-                  colorScheme: ColorScheme.fromSeed(seedColor: state.colors['primaryColor'])
-                ),
-                darkTheme: ThemeData(
-                  brightness: Brightness.dark,
-                  colorScheme: ColorScheme.fromSeed(seedColor: state.colors['primaryColor'], brightness: Brightness.dark)
-                ),
-                themeMode: state.theme,
-                home: const MyHomePage(title: 'Favorite Quotes To Go'));
+            return GestureDetector(
+              onTap: () {
+                FocusScopeNode currentFocus = FocusScope.of(context);
+
+                if (!currentFocus.hasPrimaryFocus &&
+                    currentFocus.focusedChild != null) {
+                  FocusManager.instance.primaryFocus!.unfocus();
+                }
+              },
+              child: MaterialApp(
+                  title: 'Quotes App',
+                  theme: ThemeData(
+                    brightness: Brightness.light,
+                    colorScheme: ColorScheme.fromSeed(seedColor: state.colors['primaryColor'])
+                  ),
+                  darkTheme: ThemeData(
+                    brightness: Brightness.dark,
+                    colorScheme: ColorScheme.fromSeed(seedColor: state.colors['primaryColor'], brightness: Brightness.dark)
+                  ),
+                  themeMode: state.theme,
+                  home: const MyHomePage(title: 'Favorite Quotes To Go')),
+            );
           },
-        ));
+        )
+    );
   }
 }
 
