@@ -1,7 +1,7 @@
+import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:quotes_app/widgets/chatbubble.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:quotes_app/db/collection.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,12 +17,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     ScrollController controller = ScrollController();
-    Collection db = Collection();
 
     return Scaffold(
       body: SingleChildScrollView(
         child: FutureBuilder<QuerySnapshot>(
-            future: db.getCollections(),
+            future: _getCollections(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return const Text('Something went wrong');
@@ -52,5 +51,15 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
+  }
+}
+
+//function to check database connection
+Future<QuerySnapshot<Map<String, dynamic>>> _getCollections() async {
+  try {
+    return await FirebaseFirestore.instance.collection('Quotes').get();
+  } catch (error) {
+    log(error.toString());
+    rethrow;
   }
 }

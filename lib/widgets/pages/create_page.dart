@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quotes_app/widgets/chatbubble.dart';
 import '../../blocs/settings/settings_bloc.dart';
-import 'package:quotes_app/db/collection.dart';
 
 class CreateQuotePage extends StatelessWidget{
   final TextEditingController _quoteController = TextEditingController();
@@ -12,9 +11,6 @@ class CreateQuotePage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-
-  Collection db = Collection();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Quote'),
@@ -30,7 +26,6 @@ class CreateQuotePage extends StatelessWidget{
                 ElevatedButton(
                   onPressed: () {
                     _sendQuote(context, state.authorName);
-                    db.getCollections();
                   },
                   child: const Text('Send Quote'),
                 ),
